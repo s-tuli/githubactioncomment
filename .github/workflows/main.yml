@@ -1,0 +1,27 @@
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+    - name: Hello world action step
+      id: hello
+      uses: actions/hello-world-javascript-action@v1
+      with:
+        who-to-greet: 'Anu t'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
+    - name: Add Comment
+      id: AddComment
+      uses: actions/AddComment@master
+      with:
+        owner: s-tuli
+        repo: dev-spaces
+        pull_number: 3
+        body: Hi, this is my test! Success
+        commit_id: 611af4f93ed6e3583edb66150e229e0dce082f6a
+        path: samples/BikeSharingApp/Bikes/server.js
+        position: 1
+
