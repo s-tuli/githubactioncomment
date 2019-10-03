@@ -35,7 +35,7 @@ const octokit = new Octokit({
 } */
 
 try {
-    const repo = github.context.repo;
+    const repo = github.GitHub.GITHUB_REPOSITORY;
     const owner = repo.owner.toString();
     const actualRepo = repo.repo.toString();
     console.log(`Hello owner ${owner}!`);
@@ -46,24 +46,30 @@ try {
     console.log(`Hello pull_number ${pull_number}!`);
     const body  = JSON.stringify(core.getInput('body'), undefined, 2);
     console.log(`Hello body ${body}!`);
-    const commit_id = github.sha;
+    const commit_id = github.GitHub.GITHUB_SHA;
     console.log(`Hello commit_id ${commit_id}!`);
     const path = core.getInput('path');
-    console.log(`Hello position ${path}!`);
+    console.log(`Hello path ${path}!`);
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
-    const token = toolkit.token;
+    const token = process.env['GITHUB_TOKEN'];
     console.log(`Hello token ${token}`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
-    const headref = github.head_ref.toString();
-    const baseref = github.base_ref.toString();
+    const headref = github.GitHub.GITHUB_HEAD_REF;
+    const baseref = github.Github.GITHUB_BASE_REF;
     console.log(`hello headref ${headref}`);
     console.log(`hello baseref ${baseref}`);
-    const githubsha = github.sha.toString();
-    console.log(`hello githubsha ${githubsha}`);
-    //const bodyprime = `http://${headref}.s/${${{ secrets.PARENT_SPACE }}}`;
+    
+    const host = process.env['GITHUB_HOST_SUFFIX'];
+    
+    const parent = process.env['GITHUB_PARENT_SPACE'];
+    if("dev"==parent)
+    {
+        console.log(`###############yes! this is the parent space secret`);
+    }
+    const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
 } catch (error) {
     core.setFailed(error.message);
 }

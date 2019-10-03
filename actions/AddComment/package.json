@@ -13,6 +13,6 @@
     "@actions/core": "^1.1.1",
     "@actions/github": "^1.1.0",
     "@octokit/rest": "^16.30.1",
-    "next": "^9.0.7"
+    "actions-toolkit": "^2.2.0"
   }
 }
