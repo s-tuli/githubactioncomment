@@ -1,10 +1,6 @@
 name: 'Add Comment'
 description: 'Add a comment on a PR'
-inputs:  
-  repo:  # id of input
-    description: 'repo'
-    required: true
-    default: 's-tuli/dev-spaces'
+inputs:
   pull_number:  # id of input
     description: 'pull_number'
     required: true
@@ -12,11 +8,7 @@ inputs:
   body:  # id of input
     description: 'body'
     required: true
-    default: 'MY modified comment'
-  commit_id:  # id of input
-    description: 'commit_id'
-    required: true
-    default: 'abcd'
+    default: 'MY modified comment'  
   path:  # id of input
     description: 'path'
     required: true
