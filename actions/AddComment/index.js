@@ -38,7 +38,7 @@ try {
     
     const host = process.env.GITHUB_HOST_SUFFIX.toString();
     
-    const parent = process.env.GITHUB_PARENT_SPACE.toString;
+    const parent = process.env.GITHUB_PARENT_SPACE.toString();
     if("dev"==parent)
     {
         console.log(`###############yes! this is the parent space secret`);
