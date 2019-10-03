@@ -4,7 +4,7 @@ const github = require('@actions/github');
 
 const { Toolkit } = require('actions-toolkit');
 const toolkit = new Toolkit();
-core.secrets
+
 const octokit = new Octokit({
     auth: '${token}'
 });
