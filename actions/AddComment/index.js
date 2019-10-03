@@ -37,13 +37,15 @@ try {
     console.log(`hello baseref ${baseref}`);
     
     const host = process.env.GITHUB_HOST_SUFFIX.toString();
-    
+    console.log(`###############yes! this is the host ${host}`);
     const parent = process.env.GITHUB_PARENT_SPACE.toString();
+    console.log(`###############yes! this is the parent ${parent}`);
     if("dev"==parent)
     {
         console.log(`###############yes! this is the parent space secret`);
     }
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
+    console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     octokit.pulls.createComment({
         owner: '${owner}',
         repo: '${actualRepo}',
