@@ -15,8 +15,6 @@ try {
     const owner = repoNameWithOwnerArray[0];
     const actualRepo = repoNameWithOwnerArray[1];
     console.log(`Hello owner ${owner}!`);
-    const private_spc = process.env.GITHUB_PRIVATE_SPACE;
-    console.log(`Hello  private ${private_spc}!`);
     console.log(`Hello  repo ${actualRepo}!`);
     const pull_number = core.getInput('pull_number');
     console.log(`Hello pull_number ${pull_number}!`);
