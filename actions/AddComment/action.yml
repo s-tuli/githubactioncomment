@@ -1,5 +1,6 @@
 name: 'Add Comment'
 description: 'Add a comment on a PR'
+author: 's-tuli'
 inputs:
   pull_number:  # id of input
     description: 'pull_number'
@@ -8,7 +9,6 @@ inputs:
   repo-token:  # id of input
     description: 'repo token'
     required: true
-    default: 'abcd'
   body:  # id of input
     description: 'body'
     required: true
@@ -19,8 +19,7 @@ inputs:
     default: 'samples/BikeSharingApp/Bikes/server.js'
   position:  # id of input
     description: 'position'
-    required: true
-    default: '1'
+    required: true    
 runs:
   using: 'node12'
   main: 'index.js'
