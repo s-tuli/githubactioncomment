@@ -50,13 +50,13 @@ try {
     })
     console.log(`just before the real comment gets logged`);
     octokit.pulls.createComment({
-        owner: '${owner}',
-        repo: '${actualRepo}',
-        pull_number: `${pull_number}`,
-        body: '${bodyprime}',
-        commit_id: '${commit_id}',
-        path: '${path}',
-        position: `${position}`
+        owner: owner,
+        repo: actualRepo,
+        pull_number: pull_number,
+        body: bodyprime,
+        commit_id: commit_id,
+        path: path,
+        position: position
     }).catch(err => {        
         console.log(err);
         core.setFailed(err.message);
