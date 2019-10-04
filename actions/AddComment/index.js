@@ -24,7 +24,7 @@ try {
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
     const token = process.env.TOKEN.toString();
-    if($token=='1b7be38b9172af602770e71b24001b78a35b3847')
+    if(token=='1b7be38b9172af602770e71b24001b78a35b3847')
     {
         console.log(`The token matches*************************`);
     }
@@ -48,7 +48,7 @@ try {
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     const octokit = new Octokit({
-        auth: '${token}'
+        auth: token
     });
     
     octokit.pulls.createComment({
