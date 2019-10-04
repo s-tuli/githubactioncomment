@@ -47,10 +47,7 @@ try {
     
     const octokit = new Octokit({
         auth: token
-    }).catch(err => {        
-        console.log(err);
-        core.setFailed(err.message);
-      });
+    })
     console.log(`just before the real comment gets logged`);
     octokit.pulls.createComment({
         owner: '${owner}',
