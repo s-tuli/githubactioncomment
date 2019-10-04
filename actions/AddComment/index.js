@@ -42,7 +42,7 @@ try {
     {
         console.log(`###############yes! this is the parent space secret`);
     }
-    const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
+    const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     
     const octokit = new Octokit({
@@ -54,7 +54,7 @@ try {
         repo: actualRepo,
         pull_number: pull_number,
         body: bodyprime,
-        commit_id: commit_id,
+        commit_id: '309f314673dce90d5d3e66092da0e539aea530ea',
         path: path,
         position: position
     }).catch(err => {        
