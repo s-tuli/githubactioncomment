@@ -5,9 +5,6 @@ const github = require('@actions/github');
 const { Toolkit } = require('actions-toolkit');
 const toolkit = new Toolkit();
 
-const octokit = new Octokit({
-    auth: '${token}'
-});
 
 try {
     const repo = process.env.GITHUB_REPOSITORY.toString();
@@ -46,6 +43,10 @@ try {
     }
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
+    const octokit = new Octokit({
+        auth: '${token}'
+    });
+    
     octokit.pulls.createComment({
         owner: '${owner}',
         repo: '${actualRepo}',
