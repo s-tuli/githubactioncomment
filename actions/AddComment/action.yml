@@ -5,10 +5,14 @@ inputs:
     description: 'pull_number'
     required: true
     default: 3
+  repo-token:  # id of input
+    description: 'repo token'
+    required: true
+    default: 'abcd'
   body:  # id of input
     description: 'body'
     required: true
-    default: 'MY modified comment'  
+    default: 'My modified comment'  
   path:  # id of input
     description: 'path'
     required: true
