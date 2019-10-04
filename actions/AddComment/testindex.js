@@ -6,7 +6,7 @@ const github = require('@actions/github');
 //const toolkit = new Toolkit();
 
 const octokit = new Octokit({
-    auth: '50629db6834009d9118b3a1473272d6c6fc0afcd'
+    auth: 'a32eb8b2f746f01a8634798f5fc39cb1d935d169'
 });
 
 octokit.pulls.createComment({
