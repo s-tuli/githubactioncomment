@@ -49,11 +49,11 @@ try {
     octokit.pulls.createComment({
         owner: '${owner}',
         repo: '${actualRepo}',
-        pull_number: '${pull_number}',
+        pull_number: `${pull_number}`,
         body: '${bodyprime}',
         commit_id: '${commit_id}',
         path: '${path}',
-        position: 2//'${position}'
+        position: `${position}`
     });
 } catch (error) {
     core.setFailed(error.message);
