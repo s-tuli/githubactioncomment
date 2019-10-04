@@ -46,14 +46,14 @@ try {
     }
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
-    octokit.pulls.createComment({
+    await octokit.pulls.createComment({
         owner: '${owner}',
         repo: '${actualRepo}',
         pull_number: '${pull_number}',
         body: '${bodyprime}',
         commit_id: '${commit_id}',
         path: '${path}',
-        position: '${position}'
+        position: 2//'${position}'
     });
 } catch (error) {
     core.setFailed(error.message);
