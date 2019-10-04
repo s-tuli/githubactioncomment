@@ -24,7 +24,8 @@ try {
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
     const token =  core.getInput('repo-token');
-    console.log(`Hello token ${token}`);
+    var len = token.length;
+    console.log(`Hello token's len is: ${len} and the token is ${token}`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
@@ -45,7 +46,7 @@ try {
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     
     const octokit = new Octokit({
-        auth: '${token}'
+        auth: token
     });
     
     octokit.pulls.createComment({
