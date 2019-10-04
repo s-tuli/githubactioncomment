@@ -23,7 +23,7 @@ try {
     console.log(`Hello path ${path}!`);
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
-    const token = process.env.GITHUB_TOKEN.toString();
+    const token = process.env.TOKEN.toString();
     console.log(`Hello token ${token}`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
