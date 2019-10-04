@@ -46,7 +46,7 @@ try {
     }
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
-    await octokit.pulls.createComment({
+    octokit.pulls.createComment({
         owner: '${owner}',
         repo: '${actualRepo}',
         pull_number: '${pull_number}',
