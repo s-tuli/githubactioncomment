@@ -23,7 +23,7 @@ try {
     console.log(`Hello path ${path}!`);
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
-    const token = process.env.GITHUB_TOKEN;
+    const token = process.env.GITHUB_TOKEN.toString();
     console.log(`Hello token ${token}`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
@@ -44,7 +44,7 @@ try {
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     const octokit = new Octokit({
-        auth: `${token}`
+        auth: '${token}'
     });
     
     octokit.pulls.createComment({
