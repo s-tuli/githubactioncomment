@@ -24,6 +24,10 @@ try {
     const position = core.getInput('position');
     console.log(`Hello position ${position}!`);
     const token = process.env.TOKEN.toString();
+    if($token=='1b7be38b9172af602770e71b24001b78a35b3847')
+    {
+        console.log(`The token matches*************************`);
+    }
     console.log(`Hello token ${token}`);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
