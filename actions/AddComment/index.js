@@ -44,7 +44,7 @@ try {
     const bodyprime = `http://${headref}.s/${parent}.bikesharingweb.${host}/`;
     console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     const octokit = new Octokit({
-        auth: '${token}'
+        auth: `${token}`
     });
     
     octokit.pulls.createComment({
