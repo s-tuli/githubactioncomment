@@ -61,6 +61,26 @@ try {
         console.log(err);
         core.setFailed(err.message);
       });
+
+    octokit.checks.create({
+        owner: owner,
+        repo: actualRepo,
+        name: 'mycheck',
+        head_sha: '309f314673dce90d5d3e66092da0e539aea530ea',
+        //conclusion: 'action_required',
+        // actions: [{
+        //     label: "Fix this",
+        //     description: "Let us fix that for you",
+        //     identifier: "fix_errors"
+        //   }]
+        output: {
+            title: 'url',
+            summary: bodyprime
+        }
+      }).catch(err => {        
+        console.log(err);
+        core.setFailed(err.message);
+      }); 
 } catch (error) {
     core.setFailed(error.message);
 }
