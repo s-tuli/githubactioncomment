@@ -1,12 +1,18 @@
-const Octokit = require("@octokit/rest");
+/* const Octokit = require("@octokit/rest");
 const core = require('@actions/core');
 const github = require('@actions/github');
-
+const { App } = require("@octokit/app");
 const { Toolkit } = require('actions-toolkit');
 const toolkit = new Toolkit();
 
 
 try {
+    const sha = process.env.GITHUB_SHA;
+    const privateKey = core.getInput("input-key");
+    const APP_ID = 42954;
+    console.log("SHA is-->"+sha);
+    console.log("privateKey is-->"+privateKey.length);
+
     const repo = process.env.GITHUB_REPOSITORY.toString();
     var repoNameWithOwnerArray = repo.split("/", 2); 
     const owner = repoNameWithOwnerArray[0];
@@ -49,6 +55,7 @@ try {
         auth: token
     })
     console.log(`just before the real comment gets logged`);
+    core.setOutput("result", 'success');
     octokit.pulls.createComment({
         owner: owner,
         repo: actualRepo,
@@ -61,27 +68,129 @@ try {
         console.log(err);
         core.setFailed(err.message);
       });
+      
+      createCheckRun(APP_ID, privateKey, sha);
+    
+} catch (error) {
+    core.setFailed(error.message);
+}
+async function createCheckRun(id, privateKey, sha) {
+    const octokit = await octoKitHandler(id, privateKey, sha);
+    const {data} = octokit.checks.create({
+        owner: 's-tuli',
+        repo: 'dev-spaces',
+        name: 'test check run',
+        head_sha: sha,
+        actions: [
+            {
+                label: 'Fix Now',
+                identifier: 'fix_errors',
+                description: 'Allow us to fix these errors for you'
+            }
+        ]
 
-    octokit.checks.create({
+    }).catch(err => console.log(err));
+    return data;
+} */
+
+const core = require('@actions/core');
+const github = require('@actions/github');
+const Octokit = require("@octokit/rest");
+const { App } = require("@octokit/app");
+const  request  = require("@octokit/request");
+
+
+try {
+    const repo = process.env.GITHUB_REPOSITORY.toString();
+    var repoNameWithOwnerArray = repo.split("/", 2); 
+    const owner = repoNameWithOwnerArray[0];
+    const actualRepo = repoNameWithOwnerArray[1];
+    console.log(`Hello owner ${owner}!`);
+    console.log(`Hello  repo ${actualRepo}!`);
+    const sha = process.env.GITHUB_SHA;
+    const privateKey = core.getInput("input-key");
+    const APP_ID = 42954;
+    console.log("SHA is-->"+sha);
+    const path = core.getInput('path');
+    console.log(`Hello path ${path}!`);
+    const position = core.getInput('position');
+    console.log(`Hello position ${position}!`);
+    console.log("privateKey is-->"+privateKey.length);
+    const nameToGreet = core.getInput('who-to-greet');
+    console.log(`Hiiiiii ${nameToGreet}!`);
+    const time = (new Date()).toTimeString();
+    core.setOutput("time", time);
+    core.setOutput("status", "Success");
+    const pull_number = core.getInput('pull_number');
+    console.log(`Hello pull_number ${pull_number}!`);
+    // Get the JSON webhook payload for the event that triggered the workflow
+    const payload = JSON.stringify(github.context.payload, undefined, 2)
+    console.log(`The event payload: ${payload}`);
+    octokit.pulls.createComment({
         owner: owner,
         repo: actualRepo,
-        name: 'mycheck',
-        head_sha: '309f314673dce90d5d3e66092da0e539aea530ea',
-        //conclusion: 'action_required',
-        // actions: [{
-        //     label: "Fix this",
-        //     description: "Let us fix that for you",
-        //     identifier: "fix_errors"
-        //   }]
-        output: {
-            title: 'url',
-            summary: bodyprime
-        }
-      }).catch(err => {        
+        pull_number: pull_number,
+        body: bodyprime,
+        commit_id: sha,
+        path: path,
+        position: position
+    }).catch(err => {        
         console.log(err);
         core.setFailed(err.message);
-      }); 
+      });
+    createCheckRun(APP_ID, privateKey, sha, owner, repo, 'mycheckrun');
 } catch (error) {
     core.setFailed(error.message);
 }
 
+
+
+async function createCheckRun(id, privateKey, sha, owner, repo, name) {
+    const octokit = await octoKitHandler(id, privateKey, sha);
+    const {data} = octokit.checks.create({
+        owner: owner,
+        repo: repo,
+        name: name,
+        head_sha: sha,
+        actions: [
+            {
+                label: 'Fix Now',
+                identifier: 'fix_errors',
+                description: 'Allow us to fix these errors for you'
+            }
+        ]
+
+    }).catch(err => console.log(err));
+    return data;
+}
+
+async function octoKitHandler(id, privateKey, owner, repo) {
+    const app = new App({
+        id: id,
+        privateKey: privateKey
+    });
+
+    return new Octokit({
+        async auth() {
+            const installationAccessToken = await app.getInstallationAccessToken({
+                installationId: getInstallationId(app, owner, repo)
+            });
+            return `token ${installationAccessToken}`;
+        }
+    });
+}
+
+async function getInstallationId(app, owner, repo){
+    const  {data} = await request (`GET /repos/${owner}/${repo}/installation`, {
+        owner: owner,
+        repo: repo,
+        headers: {
+            authorization: `Bearer ${app.getSignedJsonWebToken()}`,
+            accept: "application/vnd.github.machine-man-preview+json"
+        }
+    });
+    if(data !== 'undefined'){
+        return  data.id;
+    }
+    throw new Error("Installation id not found");
+}

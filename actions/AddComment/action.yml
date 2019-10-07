@@ -19,7 +19,10 @@ inputs:
     default: 'samples/BikeSharingApp/Bikes/server.js'
   position:  # id of input
     description: 'position'
-    required: true    
+    required: true
+  privatekey:  # id of private key
+    description: 'private key for the github app'
+    required: true  
 runs:
   using: 'node12'
   main: 'index.js'
