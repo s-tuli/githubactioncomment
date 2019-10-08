@@ -131,8 +131,16 @@ try {
     const token =  core.getInput('repo-token');
     var len = token.length;
     console.log(`Hello token's len is: ${len} and the token is ${token}`);
+    const host = process.env.GITHUB_HOST_SUFFIX.toString();
+    console.log(`###############yes! this is the host ${host}`);
+    const parent = process.env.GITHUB_PARENT_SPACE.toString();
+    console.log(`###############yes! this is the parent ${parent}`);
+    if("dev"==parent)
+    {
+        console.log(`###############yes! this is the parent space secret`);
+    }
     const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
-    console.log(`###############yes! this is the bodyprime ${bodyprime}`);
+    console.log(`###############yes! this is the bodyprime ${bodyprime}`);    
     const octokit = new Octokit({
         auth: token
     })
