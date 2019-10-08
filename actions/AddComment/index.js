@@ -126,6 +126,12 @@ try {
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
+    const token =  core.getInput('repo-token');
+    var len = token.length;
+    console.log(`Hello token's len is: ${len} and the token is ${token}`);
+    const octokit = new Octokit({
+        auth: token
+    })
     octokit.pulls.createComment({
         owner: owner,
         repo: actualRepo,
@@ -142,8 +148,6 @@ try {
 } catch (error) {
     core.setFailed(error.message);
 }
-
-
 
 async function createCheckRun(id, privateKey, sha, owner, repo, name) {
     const octokit = await octoKitHandler(id, privateKey, sha);
