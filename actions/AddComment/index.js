@@ -129,6 +129,8 @@ try {
     const token =  core.getInput('repo-token');
     var len = token.length;
     console.log(`Hello token's len is: ${len} and the token is ${token}`);
+    const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
+    console.log(`###############yes! this is the bodyprime ${bodyprime}`);
     const octokit = new Octokit({
         auth: token
     })
@@ -160,7 +162,7 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name) {
             {
                 label: 'Fix Now',
                 identifier: 'fix_errors',
-                description: 'Allow us to fix these errors for you'
+                description: bodyprime 
             }
         ]
 
