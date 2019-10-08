@@ -97,7 +97,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const Octokit = require("@octokit/rest");
 const { App } = require("@octokit/app");
-const  request  = require("@octokit/request");
+const { request } = require("@octokit/request");
 
 
 try {
