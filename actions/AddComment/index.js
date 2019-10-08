@@ -185,7 +185,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
         id: id,
         privateKey: privateKey
     });
-    try{
+    
         const octokit =   new Octokit({
             async auth() {
                 const installationAccessToken = await app.getInstallationAccessToken({
@@ -194,10 +194,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
                 return `token ${installationAccessToken}`;
         }
         });
-        return octokit;
-    } catch (error) {
-    core.setFailed(error.message);
-    }    
+        return octokit;    
 }
 
 async function getInstallationId(app, owner, repo){
@@ -209,8 +206,5 @@ async function getInstallationId(app, owner, repo){
             accept: "application/vnd.github.machine-man-preview+json"
         }
     });
-    if(data !== 'undefined'){
-        return  data.id;
-    }
-    throw new Error("Installation id not found");
+         return  data.id;     
 }
