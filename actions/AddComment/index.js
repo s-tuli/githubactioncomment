@@ -79,7 +79,7 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
             {
                 label: 'Fix Now',
                 identifier: 'fix_errors',
-                description: bodyprime 
+                description: 'bodyprime' 
             }
         ]
 
