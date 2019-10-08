@@ -97,7 +97,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
         id: id,
         privateKey: privateKey
     });
-    const installationId =  getInstallationId(app, owner, repo);//2575400;
+    const installationId =  2575400;//getInstallationId(app, owner, repo);//2575400;
         const octokit =   new Octokit({
             async auth() {
                 const installationAccessToken = await app.getInstallationAccessToken({
