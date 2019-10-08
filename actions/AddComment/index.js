@@ -190,7 +190,10 @@ async function octoKitHandler(id, privateKey, owner, repo) {
             async auth() {
                 const installationAccessToken = await app.getInstallationAccessToken({
                     installationId: getInstallationId(app, owner, repo)
-                });
+                }).catch(err => {        
+                    console.log(err);
+                    core.setFailed(err.message);
+                  });
                 return `token ${installationAccessToken}`;
         }
         });
