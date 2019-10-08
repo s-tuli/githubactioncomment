@@ -74,13 +74,13 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
         repo: repo,
         name: name,
         head_sha: sha,//'0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
-        actions: [
+        /* actions: [
             {
                 label: 'Fix Now',
                 identifier: 'fix_errors',
                 description: 'bodyprime' 
             }
-        ],
+        ], */
         output: {
             summary: `<a href=${bodyprime}> Use this Child Space</a>`,
             title: 'Child Space',
