@@ -101,6 +101,8 @@ const  request  = require("@octokit/request");
 
 
 try {
+    const headref = process.env.GITHUB_HEAD_REF.toString();    
+    console.log(`hello headref ${headref}`);
     const repo = process.env.GITHUB_REPOSITORY.toString();
     var repoNameWithOwnerArray = repo.split("/", 2); 
     const owner = repoNameWithOwnerArray[0];
