@@ -156,12 +156,12 @@ try {
         console.log(err);
         core.setFailed(err.message);
       });
-    createCheckRun(APP_ID, privateKey, sha, owner, repo, 'mycheckrun');
+    createCheckRun(APP_ID, privateKey, sha, owner, repo, 'mycheckrun', bodyprime);
 } catch (error) {
     core.setFailed(error.message);
 }
 
-async function createCheckRun(id, privateKey, sha, owner, repo, name) {
+async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime) {
     const octokit = await octoKitHandler(id, privateKey, sha);
     const {data} = octokit.checks.create({
         owner: owner,
