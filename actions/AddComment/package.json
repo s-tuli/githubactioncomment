@@ -12,6 +12,7 @@
   "dependencies": {
     "@actions/core": "^1.1.1",
     "@actions/github": "^1.1.0",
+    "@octokit/app": "github:octokit/app",
     "@octokit/rest": "^16.30.1",
     "actions-toolkit": "^2.2.0"
   }
