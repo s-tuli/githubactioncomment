@@ -63,7 +63,6 @@ try {
         core.setFailed(err.message);
       });
     createCheckRun(APP_ID, privateKey, sha, owner, actualRepo, 'mycheckrun', bodyprime);
-    //getInstallationId()
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -74,14 +73,19 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
         owner: owner,
         repo: repo,
         name: name,
-        head_sha: '0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
+        head_sha: sha,//'0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
         actions: [
             {
                 label: 'Fix Now',
                 identifier: 'fix_errors',
                 description: 'bodyprime' 
             }
-        ]
+        ],
+        output: {
+            summary: bodyprime,
+            title: 'Child Space',
+            text: "mytext"
+
 
     }).catch(err => console.log(err));
     return data;
@@ -92,7 +96,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
         id: id,
         privateKey: privateKey
     });
-    const installationId =  2575400;//getInstallationId(app, owner, repo);
+    const installationId =  getInstallationId(app, owner, repo);//2575400;
         const octokit =   new Octokit({
             async auth() {
                 const installationAccessToken = await app.getInstallationAccessToken({
