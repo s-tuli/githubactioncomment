@@ -167,7 +167,7 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
         owner: owner,
         repo: repo,
         name: name,
-        head_sha: sha,
+        head_sha: '0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
         actions: [
             {
                 label: 'Fix Now',
@@ -209,5 +209,6 @@ async function getInstallationId(app, owner, repo){
             accept: "application/vnd.github.machine-man-preview+json"
         }
     });
-         return  data.id;     
+    console.log(`installationId: ------> ${data.id}`);     
+    return  data.id;
 }
