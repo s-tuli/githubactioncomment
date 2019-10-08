@@ -161,7 +161,7 @@ try {
     core.setFailed(error.message);
 }
 
-async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime) {
+function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime) {
     const octokit = await octoKitHandler(id, privateKey, sha);
     const {data} = octokit.checks.create({
         owner: owner,
@@ -180,7 +180,7 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
     return data;
 }
 
-async function octoKitHandler(id, privateKey, owner, repo) {
+function octoKitHandler(id, privateKey, owner, repo) {
     const app = new App({
         id: id,
         privateKey: privateKey
@@ -196,7 +196,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
     }).catch(err => console.log(err));
 }
 
-async function getInstallationId(app, owner, repo){
+function getInstallationId(app, owner, repo){
     const  {data} = await request (`GET /repos/${owner}/${repo}/installation`, {
         owner: owner,
         repo: repo,
