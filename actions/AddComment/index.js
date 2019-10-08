@@ -149,7 +149,7 @@ try {
         repo: actualRepo,
         pull_number: pull_number,
         body: bodyprime,
-        commit_id: sha,
+        commit_id: '0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
         path: path,
         position: position
     }).catch(err => {        
@@ -193,7 +193,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
             });
             return `token ${installationAccessToken}`;
         }
-    });
+    }).catch(err => console.log(err));;
 }
 
 async function getInstallationId(app, owner, repo){
