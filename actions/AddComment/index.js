@@ -82,9 +82,10 @@ async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime)
             }
         ],
         output: {
-            summary: bodyprime,
+            summary: `<a href=${bodyprime}> Use this Child Space</a>`,
             title: 'Child Space',
             text: "mytext"
+        }
 
 
     }).catch(err => console.log(err));
