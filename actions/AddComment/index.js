@@ -156,7 +156,8 @@ try {
         console.log(err);
         core.setFailed(err.message);
       });
-    createCheckRun(APP_ID, privateKey, sha, owner, repo, 'mycheckrun', bodyprime);
+    createCheckRun(APP_ID, privateKey, sha, owner, actualRepo, 'mycheckrun', bodyprime);
+    //getInstallationId()
 } catch (error) {
     core.setFailed(error.message);
 }
