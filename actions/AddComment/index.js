@@ -193,7 +193,7 @@ async function octoKitHandler(id, privateKey, owner, repo) {
             });
             return `token ${installationAccessToken}`;
         }
-    }).catch(err => console.log(err));;
+    }).catch(err => console.log(err));
 }
 
 async function getInstallationId(app, owner, repo){
