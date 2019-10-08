@@ -140,13 +140,7 @@ try {
         console.log(`###############yes! this is the parent space secret`);
     }
     const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
-    console.log(`###############yes! this is the bodyprime ${bodyprime}`);
-    const parent = process.env.GITHUB_PARENT_SPACE.toString();
-    console.log(`###############yes! this is the parent ${parent}`);
-    if("dev"==parent)
-    {
-        console.log(`###############yes! this is the parent space secret`);
-    }
+    console.log(`###############yes! this is the bodyprime ${bodyprime}`);    
     const octokit = new Octokit({
         auth: token
     })
