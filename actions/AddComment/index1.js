@@ -35,7 +35,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
   repository(owner:$owner, name:$repo) {
     pullRequest(number:$pull_number) {
       id
-    }
+    
   }
 }`;
 
@@ -77,4 +77,6 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
 
 // SHA
 // q=GitHub+Octocat+in:readme+user:defunkt
+
 findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, actualRepo, token, pull_number);
+
