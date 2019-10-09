@@ -6,7 +6,8 @@ const Octokit = require("@octokit/rest");
 const { App } = require("@octokit/app");
 const { request } = require("@octokit/request");
 
-const token =  core.getInput('repo-token');
+//const token =  core.getInput('repo-token');
+const token = '8cfd725860dcb1c9833fc8ccfa4d7a9bbbe8eb80';
 
 // function graphqlWithAuth(token) {
 //     return graphql.defaults({
@@ -16,14 +17,15 @@ const token =  core.getInput('repo-token');
 //     });
 // }
 
-const repo = process.env.GITHUB_REPOSITORY.toString();
+//const repo = process.env.GITHUB_REPOSITORY.toString();
+const repo = 's-tuli/githubactioncomment';
 var repoNameWithOwnerArray = repo.split("/", 2); 
 const owner = repoNameWithOwnerArray[0];
 const actualRepo = repoNameWithOwnerArray[1];
 console.log(`Hello owner ${owner}!`);
 console.log(`Hello  repo ${actualRepo}!`);
-const sha = process.env.GITHUB_SHA;
-const pull_number = core.getInput('pull_number');
+//const sha = process.env.GITHUB_SHA;
+//const pull_number = core.getInput('pull_number');
 function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token) {
     const  graphqlWithAuth =  graphql.defaults({
         headers: {
@@ -78,4 +80,4 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
 // SHA
 // q=GitHub+Octocat+in:readme+user:defunkt
 
-findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, actualRepo, token);
+findPullRequestSubjectIdAndAddCommentToThatPullRequest('s-tuli', 'githubactioncomment', '8cfd725860dcb1c9833fc8ccfa4d7a9bbbe8eb80');

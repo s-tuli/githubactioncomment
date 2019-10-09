@@ -11,4 +11,4 @@ inputs:
     required: true  
 runs:
   using: 'node12'
-  main: 'index1.js'
+  main: 'PullRequestComment.js'
