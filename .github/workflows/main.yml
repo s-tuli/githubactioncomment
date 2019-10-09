@@ -13,9 +13,6 @@ jobs:
     steps:    
     - uses: actions/checkout@master
     - uses: s-tuli/githubactioncomment/actions/AddComment@master
-      env:        
-        GITHUB_HOST_SUFFIX: ${{ secrets.HOST_SUFFIX }}
-        GITHUB_PARENT_SPACE: ${{ secrets.PARENT_SPACE }}
       with:        
         pull_number: '7'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
