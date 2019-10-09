@@ -23,7 +23,7 @@ console.log(`Hello owner ${owner}!`);
 console.log(`Hello  repo ${actualRepo}!`);
 const sha = process.env.GITHUB_SHA;
 const pull_number = core.getInput('pull_number');
-function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token) {
+function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token, pull_number) {
     const  graphqlWithAuth =  graphql.defaults({
         headers: {
             authorization: `token ${token}`
@@ -44,7 +44,6 @@ graphqlWithAuth(findPullRequestIdQuery, {
         }
     ).catch(err => console.log(err)).then(value => addCommentToPullRequest(value, graphqlWithAuth));
 }
-
 
 function addCommentToPullRequest(value, graphqlWithAuth){
 
@@ -77,4 +76,4 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
 
 // SHA
 // q=GitHub+Octocat+in:readme+user:defunkt
-findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token);
+findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token, pull_number);
