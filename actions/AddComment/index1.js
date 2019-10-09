@@ -77,4 +77,4 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
 
 // SHA
 // q=GitHub+Octocat+in:readme+user:defunkt
-findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token, pull_number);
+findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, actualRepo, token, pull_number);
