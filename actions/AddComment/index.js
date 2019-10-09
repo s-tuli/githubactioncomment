@@ -69,7 +69,7 @@ try {
         }
       }`;
     findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, "7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c");
-    octokit.pulls.createComment({
+    /* octokit.pulls.createComment({
         owner: owner,
         repo: actualRepo,
         pull_number: pull_number,
@@ -80,7 +80,7 @@ try {
     }).catch(err => {        
         console.log(err);
         core.setFailed(err.message);
-      });
+      }); */
     createCheckRun(APP_ID, privateKey, sha, owner, actualRepo, 'mycheckrun', bodyprime);
 } catch (error) {
     core.setFailed(error.message);
