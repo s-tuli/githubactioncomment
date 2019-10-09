@@ -40,6 +40,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
   }
 }`;
 
+
 graphqlWithAuth(findPullRequestIdQuery, {
             owner: owner,
             repo: repo,
