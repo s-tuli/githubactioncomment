@@ -5,7 +5,7 @@ const Octokit = require("@octokit/rest");
 const { App } = require("@octokit/app");
 const { request } = require("@octokit/request");
 const { graphql } = require("@octokit/graphql");
-//const  token = '6be84391790e226043a53c9a20d502ca5fe559b7';
+
 const token =  core.getInput('repo-token');
 
 // function graphqlWithAuth(token) {
