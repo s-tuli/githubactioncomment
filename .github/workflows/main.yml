@@ -14,5 +14,5 @@ jobs:
     - uses: actions/checkout@master
     - uses: s-tuli/githubactioncomment/actions/AddComment@master
       with:        
-        pull_number: 73
+        pull_number: 74
         repo-token: ${{ secrets.GITHUB_TOKEN }}
