@@ -88,7 +88,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
     });
     let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!){
   repository(owner:$owner, name:$repo) {
-    pullRequest(number:7) {
+    pullRequest(number:8) {
       id
     }
   }
