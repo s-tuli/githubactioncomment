@@ -43,7 +43,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
 graphqlWithAuth(findPullRequestIdQuery, {
             owner: owner,
             repo: repo,
-            pull_number: pull_number
+            pull_number:73
         }
     ).catch(err => console.log(err)).then(value => addCommentToPullRequest(value, graphqlWithAuth));
 }
