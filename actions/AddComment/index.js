@@ -51,9 +51,9 @@ try {
     const octokit = new Octokit({
         auth: token
     })
-    octokit.search.issuesAndPullRequests({
-        q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
-    })
+    // octokit.search.issuesAndPullRequests({
+    //     q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
+    // })
     
     let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
         addComment(input:{subjectId:$subjectId, body: Testing graphql!! $bodyprime}}) {
