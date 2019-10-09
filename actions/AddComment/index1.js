@@ -1,3 +1,4 @@
+
 const { graphql } = require("@octokit/graphql");
 const core = require('@actions/core');
 const github = require('@actions/github');
@@ -42,7 +43,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
 graphqlWithAuth(findPullRequestIdQuery, {
             owner: owner,
             repo: repo,
-            pull_number: pull_number
+            pull_number:73
         }
     ).catch(err => console.log(err)).then(value => addCommentToPullRequest(value, graphqlWithAuth));
 }
@@ -79,4 +80,3 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
 // q=GitHub+Octocat+in:readme+user:defunkt
 
 findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, actualRepo, token, pull_number);
-

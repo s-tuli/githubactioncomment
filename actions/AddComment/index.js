@@ -86,6 +86,7 @@ try {
     core.setFailed(error.message);
 }
 
+
 // get the comment without using path - use graphql
 
 /* function graphqlWithAuth(token) {
