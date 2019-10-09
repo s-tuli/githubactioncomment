@@ -15,6 +15,7 @@ const token =  core.getInput('repo-token');
 //     });
 // }
 
+
 const repo = process.env.GITHUB_REPOSITORY.toString();
 var repoNameWithOwnerArray = repo.split("/", 2); 
 const owner = repoNameWithOwnerArray[0];
