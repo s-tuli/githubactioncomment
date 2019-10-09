@@ -4,8 +4,7 @@ const github = require('@actions/github');
 const Octokit = require("@octokit/rest");
 const { App } = require("@octokit/app");
 const { request } = require("@octokit/request");
-const { graphql } = require("@octokit/graphql");
-//const  token = '6be84391790e226043a53c9a20d502ca5fe559b7';
+
 const token =  core.getInput('repo-token');
 
 // function graphqlWithAuth(token) {
@@ -23,7 +22,7 @@ const actualRepo = repoNameWithOwnerArray[1];
 console.log(`Hello owner ${owner}!`);
 console.log(`Hello  repo ${actualRepo}!`);
 const sha = process.env.GITHUB_SHA;
-
+const pull_number = core.getInput('pull_number');
 function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token) {
     const  graphqlWithAuth =  graphql.defaults({
         headers: {
@@ -33,7 +32,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
     console.log(`graphqlWithAuth ---> ${graphqlWithAuth} token length: ${token.length}`);
     let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!){
   repository(owner:$owner, name:$repo) {
-    pullRequest(number:7) {
+    pullRequest(number:$pull_number) {
       id
     }
   }
@@ -50,10 +49,7 @@ graphqlWithAuth(findPullRequestIdQuery, {
 function addCommentToPullRequest(value, graphqlWithAuth){
 
     let obj = JSON.parse(JSON.stringify(value));
-
-
-    //console.log(obj.repository.pullRequest.id);
-
+    
     graphqlWithAuth(mutation, {
         subjectId: obj.repository.pullRequest.id
 
@@ -61,8 +57,6 @@ function addCommentToPullRequest(value, graphqlWithAuth){
     ).catch(err => console.log(err)).then(result => console.log(result));
 
 }
-
-
 
 let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
   addComment(input:{subjectId:$subjectId, body: "This is a comment....!!"}) {
