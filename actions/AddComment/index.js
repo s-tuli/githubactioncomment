@@ -4,6 +4,7 @@ const github = require('@actions/github');
 const Octokit = require("@octokit/rest");
 const { App } = require("@octokit/app");
 const { request } = require("@octokit/request");
+const { graphql } = require("@octokit/graphql");
 
 
 try {
@@ -50,12 +51,13 @@ try {
     const octokit = new Octokit({
         auth: token
     })
+    findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, "7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c");
     octokit.pulls.createComment({
         owner: owner,
         repo: actualRepo,
         pull_number: pull_number,
         body: bodyprime,
-        commit_id: '0f8cd4a1875c42d65ae054e29f0fa39d465d966c',
+        commit_id: '7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c',
         path: path,
         position: position
     }).catch(err => {        
@@ -67,20 +69,81 @@ try {
     core.setFailed(error.message);
 }
 
+// get the comment without using path - use graphql
+
+/* function graphqlWithAuth(token) {
+    return graphql.defaults({
+        headers: {
+            authorization: `token ${token}`
+        }
+    });
+}
+ */
+
+function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token) {
+    const  graphqlWithAuth =  graphql.defaults({
+        headers: {
+            authorization: `token ${token}`
+        }
+    });
+    let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!){
+  repository(owner:$owner, name:$repo) {
+    pullRequest(number:7) {
+      id
+    }
+  }
+}`;
+
+graphqlWithAuth(findPullRequestIdQuery, {
+            owner: owner,
+            repo: repo
+        }
+    ).catch(err => console.log(err)).then(value => addCommentToPullRequest(value, graphqlWithAuth));
+}
+
+
+function addCommentToPullRequest(value, graphqlWithAuth){
+
+    let obj = JSON.parse(JSON.stringify(value));
+
+
+    console.log(obj.repository.pullRequest.id);
+
+    graphqlWithAuth(mutation, {
+        subjectId: obj.repository.pullRequest.id
+
+        }
+    ).catch(err => console.log(err)).then(result => console.log(result));
+
+}
+
+
+
+let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
+  addComment(input:{subjectId:$subjectId, body: Testing graphql!! $bodyprime}}) {
+    commentEdge {
+        node {
+        createdAt
+        body
+      }
+    }
+    subject {
+      id
+    }
+  }
+}`;
+octokit.search.issuesAndPullRequests({
+    q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
+})
+
 async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime) {
     const octokit = await octoKitHandler(id, privateKey, sha);
     const {data} = octokit.checks.create({
         owner: owner,
         repo: repo,
         name: name,
-        head_sha: '903b3cc8a07e58555865d50b85c0a27915584307',
-        /* actions: [
-            {
-                label: 'Fix Now',
-                identifier: 'fix_errors',
-                description: 'bodyprime' 
-            }
-        ], */
+        head_sha: '7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c',
+        
         output: {
             summary: `<a href=${bodyprime}> Use this Child Space</a>`,
             title: 'Child Space',
