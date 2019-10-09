@@ -51,7 +51,7 @@ try {
     const octokit = new Octokit({
         auth: token
     })
-    const octokit.search.issuesAndPullRequests({
+    octokit.search.issuesAndPullRequests({
         q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
     })
     
