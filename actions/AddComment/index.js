@@ -51,6 +51,23 @@ try {
     const octokit = new Octokit({
         auth: token
     })
+    const octokit.search.issuesAndPullRequests({
+        q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
+    })
+    
+    let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
+        addComment(input:{subjectId:$subjectId, body: Testing graphql!! $bodyprime}}) {
+          commentEdge {
+              node {
+              createdAt
+              body
+            }
+          }
+          subject {
+            id
+          }
+        }
+      }`;
     findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, "7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c");
     octokit.pulls.createComment({
         owner: owner,
@@ -116,25 +133,6 @@ function addCommentToPullRequest(value, graphqlWithAuth){
     ).catch(err => console.log(err)).then(result => console.log(result));
 
 }
-
-
-
-let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
-  addComment(input:{subjectId:$subjectId, body: Testing graphql!! $bodyprime}}) {
-    commentEdge {
-        node {
-        createdAt
-        body
-      }
-    }
-    subject {
-      id
-    }
-  }
-}`;
-octokit.search.issuesAndPullRequests({
-    q: 'SHA:7c8db812cd8942b469e74a6a3ec56a6e3f5e3e0c'
-})
 
 async function createCheckRun(id, privateKey, sha, owner, repo, name, bodyprime) {
     const octokit = await octoKitHandler(id, privateKey, sha);
