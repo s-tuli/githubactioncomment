@@ -8,21 +8,7 @@ inputs:
     default: 3
   repo-token:  # id of input
     description: 'repo token'
-    required: true
-  body:  # id of input
-    description: 'body'
-    required: true
-    default: 'My modified comment'  
-  path:  # id of input
-    description: 'path'
-    required: true
-    default: 'samples/BikeSharingApp/Bikes/server.js'
-  position:  # id of input
-    description: 'position'
-    required: true
-  privatekey:  # id of private key
-    description: 'private key for the github app'
     required: true  
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'index1.js'
