@@ -33,8 +33,8 @@ try {
     const pull_number = core.getInput('pull_number');
     console.log(`Hello pull_number ${pull_number}!`);
     // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
+    //const payload = JSON.stringify(github.context.payload, undefined, 2)
+    //console.log(`The event payload: ${payload}`);
     const token =  core.getInput('repo-token');
     var len = token.length;
     console.log(`Hello token's len is: ${len} and the token is ${token}`);
