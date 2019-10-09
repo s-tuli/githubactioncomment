@@ -56,7 +56,6 @@ function addCommentToPullRequest(value, graphqlWithAuth){
     ).catch(err => console.log(err)).then(result => console.log(result));
 
 }
-
 let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
   addComment(input:{subjectId:$subjectId, body: "This is a comment....!!"}) {
     commentEdge {
