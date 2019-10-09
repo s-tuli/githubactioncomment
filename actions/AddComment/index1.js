@@ -30,7 +30,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
         }
     });
     console.log(`graphqlWithAuth ---> ${graphqlWithAuth} token length: ${token.length}`);
-    let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!){
+    let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!, $pull_number:number!){
   repository(owner:$owner, name:$repo) {
     pullRequest(number:$pull_number) {
       id
@@ -40,7 +40,8 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
 
 graphqlWithAuth(findPullRequestIdQuery, {
             owner: owner,
-            repo: repo
+            repo: repo,
+            pull_number:pull_number
         }
     ).catch(err => console.log(err)).then(value => addCommentToPullRequest(value, graphqlWithAuth));
 }
