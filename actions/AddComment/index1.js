@@ -29,6 +29,7 @@ function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, tok
             authorization: `token ${token}`
         }
     });
+    
     console.log(`graphqlWithAuth ---> ${graphqlWithAuth} token length: ${token.length}`);
     let findPullRequestIdQuery = `query FindPullRequestID ($owner: String!, $repo: String!, $pull_number:Int!){
   repository(owner:$owner, name:$repo) {
