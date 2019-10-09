@@ -1,16 +1,21 @@
-on: [push]
+name: PRFlow Bikes
+
+on: 
+  pull_request:
+    branches:
+    - master
+    paths:
+    - actions/AddComment/**  
 
 jobs:
-  hello_world_job:
+  build:
     runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-    - name: Hello world action step
-      id: hello
-      uses: s-tuli/githubactioncomment/actions/hello@master
-      with:
-        who-to-greet: 'AT'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
-    
+    steps:    
+    - uses: actions/checkout@master
+    - uses: s-tuli/githubactioncomment/actions/AddComment@master
+      env:        
+        GITHUB_HOST_SUFFIX: ${{ secrets.HOST_SUFFIX }}
+        GITHUB_PARENT_SPACE: ${{ secrets.PARENT_SPACE }}
+      with:        
+        pull_number: '7'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
