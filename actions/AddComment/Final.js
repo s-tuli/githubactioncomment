@@ -15,7 +15,7 @@ console.log(`Hello  repo ${actualRepo}!`);
 
 function getPullNumber(){
     let commitIdArray = commitId.split("/", 3);
-    const pullNumber = commitIdArray[3];
+    const pullNumber = commitIdArray[2];
     console.log(pullNumber);
     return parseInt(pullNumber, 10);
 
