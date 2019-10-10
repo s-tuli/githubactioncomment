@@ -33,7 +33,7 @@ function addCommentToPullRequest(body, pullRequestId){
     ).catch(err => console.log(err)).then(result => console.log(result));
 
 }
-function findPullRequestAndAddComment(owner, repo, commentBody) {
+function findPullRequestAndAddComment(owner, repo, commentBody, pullNumber) {
 
     const  graphqlWithAuth =  getGraphqlWithAuth(token);
     const  findPullRequestIdQuery = findPullRequestQuery();
@@ -73,4 +73,4 @@ function findPullRequestQuery() {
 }`;
 }
 
-findPullRequestAndAddComment(owner,actualRepo,'More comments....');
+findPullRequestAndAddComment(owner,actualRepo,'More comments....', pullNumber);
