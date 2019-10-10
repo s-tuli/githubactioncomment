@@ -68,8 +68,10 @@ let pullRequestCommentMutation = addPullRequestCommentMutation()
 function getNumber(value) {
     console.log(value);
     let obj = JSON.parse(JSON.stringify(value));
+
+    console.log(`this is the json ***************${obj}`);
     const itemsArray = obj.data.items;
-    
+    //const convertToArray=itemsArray.parse
     for (let item in itemsArray){         
         console.log(item);     
     }   
