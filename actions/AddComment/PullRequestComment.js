@@ -3,7 +3,8 @@ const core = require('@actions/core');
 const { graphql } = require("@octokit/graphql");
 const  token = core.getInput('repo-token');
 const Octokit = require("@octokit/rest");
-
+const commitId = process.env.GITHUB_SHA;
+console.log(commitId);
 const repo = process.env.GITHUB_REPOSITORY.toString();
 const pullnumberFromyml = core.getInput('pull_number');
 const pullnumber = 7;
@@ -15,6 +16,7 @@ console.log(`Hello  actualRepo ${actualRepo}!`);
 console.log(`Hello  pullnumberFromyml ${pullnumberFromyml}!`);
 
 function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token, pullnumber) {
+    
     const  graphqlWithAuth =  graphql.defaults({
         headers: {
             authorization: `token ${token}`
@@ -66,7 +68,26 @@ let mutation =`mutation AddPullRequestComment($subjectId: ID!) {
   }
 }`;
 
+function getNumber(value) {
+    console.log(value);
+    let obj = JSON.parse(JSON.stringify(value));
+    console.log(obj);
+    const itemsArray = obj.data.items;
+    return itemsArray[0].number;
+}
 
-// SHA
-// q=GitHub+Octocat+in:readme+user:defunkt
+async function getPullNumber(commitId) {
+    octokit.search.issuesAndPullRequests({
+        q: `SHA:${commitId}`
+    }).catch(err => console.log(err)).then(value => {
+        const number = getNumber(value);
+        console.log(number);
+        return  getNumber(value);
+    });
+    return null
+};
+
+let pullnumber = getPullNumber(commitId);
+console.log(pullnumber);
+
 findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, actualRepo, token, pullnumber);
