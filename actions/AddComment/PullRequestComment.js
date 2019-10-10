@@ -7,7 +7,7 @@ const commitId = process.env.GITHUB_SHA;
 console.log(commitId);
 const repo = process.env.GITHUB_REPOSITORY.toString();
 const pullnumberFromyml = core.getInput('pull_number');
-const pullnumber = 7;
+//const pullnumber = 7;
 var repoNameWithOwnerArray = repo.split("/", 2); 
 const owner = repoNameWithOwnerArray[0];
 const actualRepo = repoNameWithOwnerArray[1];
