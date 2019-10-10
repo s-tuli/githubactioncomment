@@ -14,7 +14,9 @@ const actualRepo = repoNameWithOwnerArray[1];
 console.log(`Hello owner ${owner}!`);
 console.log(`Hello  actualRepo ${actualRepo}!`);
 console.log(`Hello  pullnumberFromyml ${pullnumberFromyml}!`);
-
+const octokit = new Octokit({
+    auth: token
+})
 function findPullRequestSubjectIdAndAddCommentToThatPullRequest(owner, repo, token, pullnumber) {
     
     const  graphqlWithAuth =  graphql.defaults({
