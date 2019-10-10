@@ -75,7 +75,7 @@ function getNumber(value) {
     for (let item in itemsArray){         
         console.log(item);     
     }   
-    return itemsArray[0].number;
+    return 7;//itemsArray[0].number;
 }
 
 async function getPullNumber(commitId, owner, repo, token, commentBody) {
