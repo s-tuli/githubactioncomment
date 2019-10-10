@@ -3,7 +3,7 @@ const core = require('@actions/core');
 const { graphql } = require("@octokit/graphql");
 const  token = core.getInput('repo-token');
 const Octokit = require("@octokit/rest");
-const commitId = 'fe2dda5bcd1794e85f7d04ab48986783010a008e';//process.env.GITHUB_SHA;//'dceb353398405283d101aafff1e1ff4180cc476d';//
+const commitId = process.env.GITHUB_REF;//'fe2dda5bcd1794e85f7d04ab48986783010a008e';//process.env.GITHUB_SHA;//'dceb353398405283d101aafff1e1ff4180cc476d';//
                    //this is github_sha-->'bb7dfbac158e6d66a57d6ac135a182eaedf4e94e'
                    //fe2dda5bcd1794e85f7d04ab48986783010a008e
 console.log(commitId);
