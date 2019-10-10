@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const { graphql } = require("@octokit/graphql");
 const  token = core.getInput('repo-token');
 const commitId = process.env.GITHUB_REF;
-var PRArray = commitId.split("/", 3);
+const PRArray = commitId.split("/", 3);
 const pullNumber = PRArray[2]; 
 console.log(pullNumber);
 const repo = process.env.GITHUB_REPOSITORY.toString();
