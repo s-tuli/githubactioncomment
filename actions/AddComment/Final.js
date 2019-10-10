@@ -11,7 +11,17 @@ const owner = repoNameWithOwnerArray[0];
 const actualRepo = repoNameWithOwnerArray[1];
 console.log(`Hello owner ${owner}!`);
 console.log(`Hello  repo ${actualRepo}!`);
-
+const host = process.env.GITHUB_HOST_SUFFIX.toString();
+console.log(`###############yes! this is the host ${host}`);
+const parent = process.env.GITHUB_PARENT_SPACE.toString();
+console.log(`###############yes! this is the parent ${parent}`);
+if("dev"==parent)
+{
+    console.log(`###############yes! this is the parent space secret`);
+}
+const headref = process.env.GITHUB_HEAD_REF.toString();    
+    console.log(`hello headref ${headref}`);
+const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
 
 function getPullNumber(){
     let commitIdArray = commitId.split("/", 3);
