@@ -1,12 +1,8 @@
 name: 'Add Comment'
 description: 'Add a comment on a PR'
 author: 's-tuli'
-inputs:
-  pull_number:  # id of input
-    description: 'pull_number'
-    required: true
-    default: 3
-  repo-token:  # id of input
+inputs:  
+  repo-token:  # GitHub Auth Token
     description: 'repo token'
     required: true  
 runs:
