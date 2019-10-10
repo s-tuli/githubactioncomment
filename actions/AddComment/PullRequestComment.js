@@ -3,7 +3,7 @@ const core = require('@actions/core');
 const { graphql } = require("@octokit/graphql");
 const  token = core.getInput('repo-token');
 const Octokit = require("@octokit/rest");
-const commitId = 'dceb353398405283d101aafff1e1ff4180cc476d';//process.env.GITHUB_SHA;
+const commitId = process.env.GITHUB_SHA;//'dceb353398405283d101aafff1e1ff4180cc476d';//
 console.log(commitId);
 const repo = process.env.GITHUB_REPOSITORY.toString();
 const pullnumberFromyml = core.getInput('pull_number');
