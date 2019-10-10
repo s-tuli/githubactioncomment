@@ -9,13 +9,23 @@ const pullNumber = parseInt(PRArray[2],10);
 console.log(pullNumber);
 const repo = process.env.GITHUB_REPOSITORY.toString();
 const pullnumberFromyml = core.getInput('pull_number');
-const commentBody = "This is a comment ***********";
+const host = process.env.GITHUB_HOST_SUFFIX.toString();
+console.log(`###############yes! this is the host ${host}`);
+const parent = process.env.GITHUB_PARENT_SPACE.toString();
+console.log(`###############yes! this is the parent ${parent}`);
+if("dev"==parent)
+{
+    console.log(`###############yes! this is the parent space secret`);
+}
+const headref = process.env.GITHUB_HEAD_REF.toString();    
+    console.log(`hello headref ${headref}`);
 var repoNameWithOwnerArray = repo.split("/", 2); 
 const owner = repoNameWithOwnerArray[0];
 const actualRepo = repoNameWithOwnerArray[1];
 console.log(`Hello owner ${owner}!`);
 console.log(`Hello  actualRepo ${actualRepo}!`);
 console.log(`Hello  pullnumberFromyml ${pullnumberFromyml}!`);
+const bodyprime = `http://${headref}.s.${parent}.bikesharingweb.${host}/`;
 const octokit = new Octokit({
     auth: token
 })
@@ -113,4 +123,4 @@ function findPullRequestQuery() {
 }`;
 }
 
-getPullNumber(commitId, owner, actualRepo, token, commentBody);
+getPullNumber(commitId, owner, actualRepo, token, bodyprime);
