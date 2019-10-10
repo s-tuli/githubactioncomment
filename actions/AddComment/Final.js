@@ -92,4 +92,4 @@ function findPullRequestQuery() {
 }`;
 }
 
-findPullRequestAndAddComment(owner,actualRepo,'More comments....');
+findPullRequestAndAddComment(owner,actualRepo,bodyprime);
